@@ -6,7 +6,7 @@
     closeModalBtn: document.querySelector('[data-modal-close]'),
     // Додати атрибут data-modal на бекдроп модалки
     modal: document.querySelector('[data-modal]'),
-    modalContent: document.querySelector('[modal-content]'),
+    modalContent: document.querySelector('[data-modal-content]'),
   };
 
   refs.openModalBtn.addEventListener('click', toggleModal);
