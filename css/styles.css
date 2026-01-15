@@ -48,7 +48,10 @@
   --footer-social-title-color: rgb(255 255 255);
   --footer-social-link-bg-color: rgb(77 90 229);
   --footer-social-link-bg-color-hover: rgb(49 208 170);
-
+  --footer-subscribe-title-color: rgb(255 255 255);
+  --footer-subscribe-color: rgb(255 255 255);
+  --footer-subscribe-bg-color: rgb(77 90 229);
+  --footer-subscribe-bg-color-hover: rgb(49 208 170);
 }
 /* ============= /VARIABLES ============= */
 
@@ -245,8 +248,7 @@ a {
 .hero-section {
   background-color: var(--hero-bg-color);
   background-image:
-    linear-gradient(to bottom, var(--hero-bg-grad-color), var(--hero-bg-grad-color)), 
-    url('./../images/hero-bg.jpg');
+    linear-gradient(to bottom, var(--hero-bg-grad-color), var(--hero-bg-grad-color)), url('./../images/hero-bg.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -445,7 +447,7 @@ a {
 .project-card {
   width: calc((100% - 2 * 24px) / 3);
 
-  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover {
@@ -574,4 +576,347 @@ a {
   fill: rgb(244 244 253);
 }
 
+.subscibe-block {
+  margin-left: auto;
+}
+
+.subscribe-title {
+  font-weight: 500;
+  color: var(--footer-subscribe-title-color);
+  margin-bottom: 16px;
+}
+
+.subscribe-form {
+  display: flex;
+}
+
+.subscribe-email {
+  color: rgb(255 255 255);
+  border: 1px solid rgb(255 255 255);
+  border-radius: 4px;
+  width: 264px;
+  height: 40px;
+  background-color: var(--footer-bg-color);
+  padding: 8px 16px;
+  outline: none;
+  caret-color: rgb(255 255 255);
+
+  box-shadow: 0 4px 4px 0 rgb(0 0 0 / 0.15);
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subscribe-email:-webkit-autofill,
+.subscribe-email:-webkit-autofill:hover,
+.subscribe-email:-webkit-autofill:focus {
+  /* Замість кольору фону створюємо величезну внутрішню тінь вашого кольору */
+  -webkit-box-shadow: 0 0 0px 1000px var(--footer-bg-color) inset !important;
+
+  /* Встановлюємо колір тексту, який вам потрібен (наприклад, білий) */
+  -webkit-text-fill-color: rgb(255 255 255) !important;
+
+  /* Якщо хочете зберегти плавність переходу (опціонально) */
+  transition:
+    background-color 5000s ease-in-out 0s,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subscribe-email:hover,
+.subscribe-email:focus {
+  border: 1px solid rgb(49 208 170);
+}
+
+.subscribe-email::placeholder {
+  font-size: 12px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  color: rgb(255 255 255);
+}
+
+.subscribe-btn {
+  display: flex;
+
+  border-radius: 4px;
+  width: 165px;
+  height: 40px;
+  background-color: var(--footer-subscribe-bg-color);
+  color: var(--footer-subscribe-color);
+
+  border: none;
+  padding: 8px 24px;
+  margin-left: 16px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-align: center;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subscribe-btn:hover,
+.subscribe-btn:focus {
+  background-color: var(--footer-subscribe-bg-color-hover);
+}
+
+.subscribe-btn > .icon {
+  margin-left: 16px;
+  fill: rgb(255 255 255);
+}
+
 /* ============= /FOOTER ============= */
+
+/* ============= MODAL ============= */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(46 47 66 / 0.4);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%);
+  /* transform-origin: var(--order-btn-x) var(--order-btn-y); */
+
+  width: 408px;
+  min-height: 584px;
+  border-radius: 4px;
+
+  padding: 72px 24px 24px 24px;
+
+  background-color: rgb(252 252 252);
+  box-shadow:
+    0 1px 1px 0 rgb(0 0 0 / 0.14),
+    0 1px 3px 0 rgb(0 0 0 / 0.12),
+    0 2px 1px 0 rgb(0 0 0 / 0.2);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop:not(.is-open) .modal {
+  /* transform: translate(-50%, -50%) scale(1.5); */
+  transform: translate(-50%, -50%);
+}
+
+.modal-close-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 24px;
+  right: 24px;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 100%;
+  background-color: rgb(231 233 252);
+  border: 1px solid rgb(0 0 0 / 0.1);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+  background-color: rgb(64 75 191);
+  border: none;
+}
+
+.modal-close-btn .icon {
+  fill: rgb(46 47 66);
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-close-btn:hover .icon,
+.modal-close-btn:focus .icon {
+  fill: rgb(255 255 255);
+}
+
+.modal .form-caption {
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: rgb(46 47 66);
+}
+
+.modal-form {
+  margin-top: 16px;
+}
+
+.modal-form .field {
+  margin-bottom: 8px;
+}
+
+.modal-form .field-label {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  color: rgb(142 143 153);
+
+  margin-bottom: 4px;
+}
+
+.modal-form .field-input {
+  position: relative;
+}
+
+.modal-form .field-input input {
+  width: 100%;
+
+  padding: 11px 34px;
+
+  border: 1px solid rgb(46 47 66 / 0.4);
+  border-radius: 4px;
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form .field-input textarea {
+  width: 100%;
+  height: 120px;
+
+  padding: 8px 16px;
+
+  border: 1px solid rgb(46 47 66 / 0.4);
+  border-radius: 4px;
+
+  resize: none;
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form .field-input textarea::placeholder {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  color: rgb(46 47 66 / 0.4);
+}
+
+.modal-form .field-input input:focus,
+.modal-form .field-input textarea:focus {
+  border: 1px solid rgb(77 90 229);
+}
+
+.modal-form .field-input input + .icon {
+  fill: rgb(46 47 66);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form .field-input input:focus + .icon {
+  fill: rgb(77 90 229);
+}
+
+.modal-form .field-input .icon {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+
+  fill: rgb(46 47 66);
+}
+
+.modal-form .field-checkbox input[type='checkbox'] {
+  display: none;
+  visibility: hidden;
+}
+
+.modal-form .field-checkbox {
+  display: flex;
+}
+
+.modal-form .field-checkbox > label {
+  display: flex;
+}
+
+.modal-form .field-checkbox > label > span {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 2px;
+  border: 1px solid rgb(46 47 66 / 0.4);
+  margin-right: 8px;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form .field-checkbox input[type='checkbox'] + label .icon {
+  fill: transparent;
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form .field-checkbox input[type='checkbox']:checked + label > span {
+  background-color: rgb(64 75 191);
+}
+
+.modal-form .field-checkbox input[type='checkbox']:checked + label .icon {
+  fill: rgb(244 244 253);
+}
+
+.modal-form .field-checkbox .icon {
+}
+
+.modal-form .link {
+  line-height: 1.33;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: rgb(77 90 229);
+}
+
+.modal-form .bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-form .submit-btn {
+  display: block;
+
+  border-radius: 4px;
+  padding: 16px 32px;
+  width: 169px;
+  height: 56px;
+
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+  background: rgb(77 90 229);
+  color: rgb(255 255 255);
+  border: none;
+
+  cursor: pointer;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form .submit-btn:hover,
+.modal-form .submit-btn:focus {
+  background-color: rgb(64 75 191);
+}
+/* ============= /MODAL ============= */
